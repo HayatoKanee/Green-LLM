@@ -6,16 +6,46 @@ import sys
 
 # Original code to be tested (example function that uses input and print)
 def original_code():
-    import sys;
-    R = sys.stdin.readline
-    S = lambda: map(int, R().split())
-
-    for _ in range(int(R())):
-        n, m = S()
-        a = [[*map(int, R().strip())] for _ in range(n)]
-        b = [[*map(int, R().strip())] for _ in range(n)]
-        print(('NO', 'YES')[all((sum(a[i]) - sum(b[i])) % 3 == 0 for i in range(n)) and all(
-            sum(a[i][j] - b[i][j] for i in range(n)) % 3 == 0 for j in range(m))])
+    from collections import defaultdict
+    def cf1983F():
+        n, k = map(int, input().split())
+        a = list(map(int, input().split()))
+    
+        ans = 0
+        f = [n] * n
+        for d in range(29,-1,-1):
+            p = defaultdict()
+            nf = f.copy()
+            for i in range(n):
+                cur  = (a[i] ^ ans) >> d
+                if cur in p.keys():
+                    j = p[cur]
+                    if nf[j] > i:
+                        nf[j] = i
+                p[a[i] >> d] = i
+    
+            for i in range(n-2,-1,-1):
+                if nf[i] > nf[i+1]:
+                    nf[i] = nf[i+1]
+    
+            sm = 0
+            for i in range(n):
+                sm += n - nf[i]
+    
+            if sm < k:
+                ans |= (1 << d)
+                for i, x in enumerate(nf):
+                    f[i] = x
+    
+        print(ans)
+        return
+    
+ 
+ 
+ 
+    t = int(input())
+    for i in range(t):
+        cf1983F()
 
 
 def load_test_cases(file_path):
