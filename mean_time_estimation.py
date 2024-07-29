@@ -25,13 +25,13 @@ def filter_outliers(times):
 if response.status_code == 200:
     # Parse the JSON response
     data = response.json()
-
     # Extract the problem results
     rows = data['result']['rows']
 
     problem_times = {}
 
     for row in rows:
+
         problem_results = row['problemResults']
         previous_time = 0
         for i, result in enumerate(problem_results):

@@ -1,0 +1,4 @@
+.codecarbon.config
+venv/
+intel_power_gadget_log.csv
+idea/

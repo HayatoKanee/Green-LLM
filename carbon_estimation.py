@@ -6,10 +6,32 @@ import sys
 
 # Original code to be tested (example function that uses input and print)
 def original_code():
-    for _ in range(int(input())):
+    from itertools import permutations
+
+    def solve() -> None:
         n = int(input())
-        s = [i for i in range(1, n + 1)]
-        print(*s)
+        arr = [list(map(int, input().split())) for _ in range(3)]
+        w = (sum(arr[0]) + 2) // 3
+        for p in permutations(range(3)):
+            start = [0] * 3
+            end = [0] * 3
+            i = s = 0
+            for x in p:
+                start[x] = i + 1
+                s = 0
+                while i < n and s < w:
+                    s += arr[x][i]
+                    i += 1
+                end[x] = i
+            if s >= w:
+                for i in range(3):
+                    print(start[i], end[i], end=" ")
+                print()
+                return
+        print(-1)
+
+    for _ in range(int(input())):
+        solve()
 
 
 def load_test_cases(file_path):
