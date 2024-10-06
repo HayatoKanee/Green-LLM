@@ -1,10 +1,10 @@
 import numpy as np
 import requests
 
-# Define the API endpoint
+# Define the codeforce API endpoint
 url = 'https://codeforces.com/api/contest.status'
 params = {
-    'contestId': 1983,
+    'contestId': 1994,
     'asManager': 'False',
     'from': 1,
     'count': 200000,
@@ -30,7 +30,7 @@ def calculate_average_runtime(data):
         verdict = result['verdict']
         memory_consumed = result['memoryConsumedBytes']
 
-        if programming_language.startswith('C++') and verdict == 'OK':
+        if  programming_language.lower().startswith('py') and verdict == 'OK':
             if problem_index not in index_times:
                 index_times[problem_index] = []
                 index_memory[problem_index] = []
@@ -51,11 +51,9 @@ def calculate_average_runtime(data):
     return average_times, average_memory
 
 
-# Make the GET request
 response = requests.get(url, params=params)
 
 if response.status_code == 200:
-    # Parse the JSON response
     data = response.json()
 
     if data['status'] == 'OK':

@@ -1,10 +1,10 @@
 import requests
 import numpy as np
 
-# Define the API endpoint
+# Define the codeforce API endpoin
 url = 'https://codeforces.com/api/contest.standings'
 params = {
-    'contestId': 1983,
+    'contestId': 1994,
     'asManager': 'False',
     'from': 1,
     'count': 10000,

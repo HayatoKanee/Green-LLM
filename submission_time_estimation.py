@@ -5,7 +5,7 @@ from collections import defaultdict
 # Define the API endpoint
 url = 'https://codeforces.com/api/contest.status'
 params = {
-    'contestId': 1983,
+    'contestId': 1984,
     'asManager': 'False',
     'from': 1,
     'count': 200000,
